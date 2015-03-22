@@ -4,15 +4,15 @@
 class VKSubject : public VKObject
 {
 public:
-  VKSubject(void);
-  VKSubject(string _SubjectName);
-  string ClassName(void);
-  string Print(void);
-  bool operator==(VKObject &object);
-  string GetSubjectName(void);
-  void SetSubjectName(string _SubjectName);
+  VKSubject();
+  VKSubject(const string& _SubjectName);
+  string GetClassName();
+  string Print();
+  bool operator==(const VKSubject& object);
+  string GetSubjectName();
+  void SetSubjectName(const string& _SubjectName);
 private:
   string SubjectName;
 };
 
-#endif 
+#endif  

@@ -15,4 +15,4 @@ protected:
   VKListObject *head;
 };
 
-#endif 
+#endif  

@@ -19,4 +19,4 @@ private:
   VKListObject *next;
 };
 
-#endif 
+#endif

@@ -1,12 +1,12 @@
 #include "VKStudent.h"
-VKStudent::VKStudent(void)
+VKStudent::VKStudent()
 {
   Name = "";
   Sex = true;
   Age = 0;
   marks = new VKMarkList();
 }
-VKStudent::VKStudent(string _Name, bool _Sex, unsigned int _Age, VKMarkList *_marks)
+VKStudent::VKStudent(const string& _Name, const bool& _Sex, const unsigned int& _Age, VKMarkList* _marks)
 {
   Name = _Name;
   Sex = _Sex;
@@ -15,15 +15,15 @@ VKStudent::VKStudent(string _Name, bool _Sex, unsigned int _Age, VKMarkList *_ma
   if (marks == 0)
     marks = new VKMarkList();
 }
-VKStudent::~VKStudent(void)
+VKStudent::~VKStudent()
 {
   delete marks;
 }
-string VKStudent::ClassName(void)
+string VKStudent::GetClassName()
 {
   return "VKStudent";
 }
-string VKStudent::Print(void)
+string VKStudent::Print()
 {
   stringstream ss;
   stringstream sm;
@@ -33,48 +33,48 @@ string VKStudent::Print(void)
     ss << " Marks: " << endl << ss.str();
   return ss.str();
 }
-bool VKStudent::operator==(VKObject &object)
+bool VKStudent::operator==(const VKStudent& object)
 {
-  VKStudent &s = dynamic_cast<VKStudent&>(object);
+  VKStudent s = object;
   return (Name == s.GetName() && Sex == s.GetSex() && Age == s.GetAge());
 }
-string VKStudent::GetName(void)
+string VKStudent::GetName()
 {
   return Name;
 }
-void VKStudent::SetName(string _Name)
+void VKStudent::SetName(const string& _Name)
 {
   Name = _Name;
 }
-bool VKStudent::GetSex(void)
+bool VKStudent::GetSex()
 {
   return Sex;
 }
-void VKStudent::SetSex(bool _Sex)
+void VKStudent::SetSex(const bool& _Sex)
 {
   Sex = _Sex;
 }
-unsigned int VKStudent::GetAge(void)
+unsigned int VKStudent::GetAge()
 {
   return Age;
 }
-void VKStudent::SetAge(unsigned int _Age)
+void VKStudent::SetAge(const unsigned int& _Age)
 {
   Age = _Age;
 }
-VKMarkList *VKStudent::GetMarks(void)
+VKMarkList* VKStudent::GetMarks()
 {
   return marks;
 }
-bool VKStudent::IsExcellent(void)
+bool VKStudent::IsExcellent()
 {
   return (marks->MinMark() == 5);
 }
-bool VKStudent::IsBad(void)
+bool VKStudent::IsBad()
 {
   return (marks->MinMark() <= 3);
 }
-void VKStudent::AddMark(VKMark *mark)
+void VKStudent::AddMark(VKMark* mark)
 {
-  marks->Add(mark);
+  marks->marks.push_back(*mark);
 }

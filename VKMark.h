@@ -5,18 +5,18 @@
 class VKMark : public VKObject
 {
 public:
-  VKMark(void);
-  VKMark(VKSubject _subject, unsigned int _mark);
-  string ClassName(void);
-  string Print(void);
-  bool operator==(VKObject &object);
-  VKSubject GetSubject(void);
-  void SetSubject(VKSubject _subject);
-  unsigned int GetMark(void);
-  void SetMark(unsigned int _mark);
+  VKMark();
+  VKMark(const VKSubject& _subject, const unsigned int& _mark);
+  string GetClassName();
+  string Print();
+  bool operator==(const VKMark& object);
+  VKSubject GetSubject();
+  void SetSubject(const VKSubject& _subject);
+  unsigned int GetMark();
+  void SetMark(const unsigned int& _mark);
 private:
   VKSubject subject;
   unsigned int mark;
 };
 
-#endif 
+#endif

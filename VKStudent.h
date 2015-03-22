@@ -5,27 +5,27 @@
 class VKStudent : public VKObject
 {
 public:
-  VKStudent(void);
-  VKStudent(string _Name, bool _Sex, unsigned int _Age, VKMarkList *_marks = 0);
-  ~VKStudent(void);
-  string ClassName(void);
-  string Print(void);
-  bool operator==(VKObject &object);
-  string GetName(void);
-  void SetName(string _Name);
-  bool GetSex(void);
-  void SetSex(bool _Sex);
-  unsigned int GetAge(void);
-  void SetAge(unsigned int _Age);
-  VKMarkList *GetMarks(void);
-  bool IsExcellent(void);
-  bool IsBad(void);
-  void AddMark(VKMark *mark);
+  VKStudent();
+  VKStudent(const string& _Name, const bool& _Sex, const unsigned int& _Age, VKMarkList* _marks = 0);
+  ~VKStudent();
+  string GetClassName();
+  string Print();
+  bool operator==(const VKStudent& object);
+  string GetName();
+  void SetName(const string& _Name);
+  bool GetSex();
+  void SetSex(const bool& _Sex);
+  unsigned int GetAge();
+  void SetAge(const unsigned int& _Age);
+  VKMarkList* GetMarks();
+  bool IsExcellent();
+  bool IsBad();
+  void AddMark(VKMark* mark);
 private:
   string Name;
   bool Sex;
   unsigned int Age;
-  VKMarkList *marks;
+  VKMarkList* marks;
 };
 
-#endif 
+#endif  

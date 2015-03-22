@@ -1,77 +1,42 @@
-#include "VKMarkList.h"
-unsigned int VKMarkList::MinMark(void)
+#include "VKMark.h"
+VKMark::VKMark()
 {
-  unsigned int min = INT_MAX;
-  if (head == 0)
-    return min;
-  while (head->GetPreviousObject() != 0)
-    head = head->GetPreviousObject();
-  VKListObject *tmp = head;
-  while (tmp != 0)
-  {
-    unsigned int mark = dynamic_cast<VKMark*>(tmp->GetObject())->GetMark();
-    if (mark < min)
-      min = mark;
-    tmp = tmp->GetNextObject();
-  }
-  return min;
+  subject = VKSubject();
+  mark = 0;
 }
-unsigned int VKMarkList::MaxMark(void)
+VKMark::VKMark(const VKSubject& _subject, const unsigned int& _mark)
 {
-  unsigned int max = 0;
-  if (head == 0)
-    return max;
-  while (head->GetPreviousObject() != 0)
-    head = head->GetPreviousObject();
-  VKListObject *tmp = head;
-  while (tmp != 0)
-  {
-    unsigned int mark = dynamic_cast<VKMark*>(tmp->GetObject())->GetMark();
-    if (mark > max)
-      max = mark;
-    tmp = tmp->GetNextObject();
-  }
-  return max;
+  subject = _subject;
+  mark = _mark;
 }
-float VKMarkList::Average(void)
+string VKMark::GetClassName()
 {
-  float avg = 0.0;
-  unsigned int count = 0;
-
-  if (head == 0)
-    return avg;
-  while (head->GetPreviousObject() != 0)
-    head = head->GetPreviousObject();
-  VKListObject *tmp = head;
-  while (tmp != 0)
-  {
-    unsigned int mark = dynamic_cast<VKMark*>(tmp->GetObject())->GetMark();
-    avg += mark;
-    count++;
-    tmp = tmp->GetNextObject();
-  }
-
-  return avg / count;
+  return "VKMark";
 }
-float VKMarkList::Average(VKSubject &subject)
+string VKMark::Print()
 {
-  float avg = 0.0;
-  unsigned int count = 0;
-
-  if (head == 0)
-    return avg;
-  while (head->GetPreviousObject() != 0)
-    head = head->GetPreviousObject();
-  VKListObject *tmp = head;
-  while (tmp != 0)
-  {
-    VKMark *mark = dynamic_cast<VKMark*>(tmp->GetObject());
-    if (mark->GetSubject() == subject)
-    {
-      avg += mark->GetMark();
-      count++;
-    }
-    tmp = tmp->GetNextObject();
-  }
-  return avg / count;
+  stringstream ss;
+  ss << "Subject: " << subject.GetSubjectName() << " Mark: " << mark;
+  return ss.str();
+}
+bool VKMark::operator==(const VKMark& object)
+{
+  VKMark m = object;
+  return (m.GetSubject() == GetSubject() && m.GetMark() == GetMark());
+}
+VKSubject VKMark::GetSubject()
+{
+  return subject;
+}
+void VKMark::SetSubject(const VKSubject& _subject)
+{
+  subject = _subject;
+}
+unsigned int VKMark::GetMark()
+{
+  return mark;
+}
+void VKMark::SetMark(const unsigned int& _mark)
+{
+  mark = _mark;
 }

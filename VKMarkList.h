@@ -1,14 +1,22 @@
-#ifndef _VKMARKLIST_H_
-#define _VKMARKLIST_H_
-#include "VKList.h"
-#include "VKMark.h"
-class VKMarkList : public VKList
+#ifndef _VKMARK_H_
+#define _VKMARK_H_
+#include "VKObject.h"
+#include "VKSubject.h"
+class VKMark : public VKObject
 {
 public:
-  unsigned int MinMark(void);
-  unsigned int MaxMark(void);
-  float Average(void);
-  float Average(VKSubject &subject);
+  VKMark();
+  VKMark(const VKSubject& _subject, const unsigned int& _mark);
+  string GetClassName();
+  string Print();
+  bool operator==(const VKMark& object);
+  VKSubject GetSubject();
+  void SetSubject(const VKSubject& _subject);
+  unsigned int GetMark();
+  void SetMark(const unsigned int& _mark);
+private:
+  VKSubject subject;
+  unsigned int mark;
 };
 
-#endif 
+#endif

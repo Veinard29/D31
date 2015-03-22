@@ -2,13 +2,13 @@
 #define _VKOBJECT_H_
 #include <string>
 #include <sstream>
+#include <list>
 using namespace std;
 class VKObject
 {
 public:
-  virtual string ClassName(void) = 0;
-  virtual string Print(void) = 0;
-  virtual bool operator==(VKObject&) = 0;
+  virtual string GetClassName() = 0;
+  virtual string Print() = 0;
 };
+#endif  
 
-#endif 

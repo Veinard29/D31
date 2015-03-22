@@ -5,26 +5,25 @@
 class VKGroup : public VKObject
 {
 public:
-  VKGroup(void);
-  VKGroup(string _Name, VKStudentList *_students);
-  virtual ~VKGroup(void);
-  string ClassName(void);
-  string Print(void);
-  string GetName(void);
-  void SetName(string _Name);
-  VKStudentList *GetStudents(void);
-  VKStudentList *GetExcellentStudents(void);
-  VKStudentList *GetBadStudents(void);
-  float Average(void);
-  float Average(VKSubject &subject);
+  VKGroup();
+  VKGroup(const string& _Name, VKStudentList* _students);
+  virtual ~VKGroup();
+  string GetClassName();
+  string Print();
+  string GetName();
+  void SetName(const string& _Name);
+  VKStudentList* GetStudents();
+  VKStudentList* GetExcellentStudents();
+  VKStudentList* GetBadStudents();
+  float Average();
+  float Average(const VKSubject& subject);
   void Clear();
-  void AddStudent(VKStudent *student);
-  void RemoveStudent(VKStudent *student);
-  VKGroup &operator+(VKStudent *student);
-  bool operator==(VKObject &object);
+  void AddStudent(VKStudent* student);
+  void RemoveStudent(VKStudent* student);
+  VKGroup& operator+=(VKStudent* student);
 private:
   string Name;
-  VKStudentList *students;
+  VKStudentList* students;
 };
 
-#endif 
+#endif  // _VKGROUP_H_

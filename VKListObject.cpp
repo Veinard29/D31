@@ -48,4 +48,3 @@ void VKListObject::SetNextObject(VKListObject *_object, bool bInsertOnly)
   if (!bInsertOnly)
     next->SetPreviousObject(this);
 }
-

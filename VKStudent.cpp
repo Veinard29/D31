@@ -4,20 +4,24 @@ VKStudent::VKStudent()
   Name = "";
   Sex = true;
   Age = 0;
-  marks = new VKMarkList();
 }
 VKStudent::VKStudent(const string& _Name, const bool& _Sex, const unsigned int& _Age, VKMarkList* _marks)
 {
   Name = _Name;
   Sex = _Sex;
   Age = _Age;
-  marks = _marks;
-  if (marks == 0)
-    marks = new VKMarkList();
+  try
+  {
+    if (_marks != 0)
+      marks = *_marks;
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is null");
+  }
 }
 VKStudent::~VKStudent()
 {
-  delete marks;
 }
 string VKStudent::GetClassName()
 {
@@ -28,7 +32,7 @@ string VKStudent::Print()
   stringstream ss;
   stringstream sm;
   ss << "Name: " << Name << " Sex: " << ((Sex == true) ? "M" : "F") << " Age: " << Age;
-  sm << marks->Print();
+  sm << marks.Print();
   if (!sm.str().empty()) 
     ss << " Marks: " << endl << ss.str();
   return ss.str();
@@ -62,19 +66,27 @@ void VKStudent::SetAge(const unsigned int& _Age)
 {
   Age = _Age;
 }
-VKMarkList* VKStudent::GetMarks()
+
+VKMarkList& VKStudent::GetMarks()
 {
   return marks;
 }
 bool VKStudent::IsExcellent()
 {
-  return (marks->MinMark() == 5);
+  return (marks.MinMark() == 5);
 }
 bool VKStudent::IsBad()
 {
-  return (marks->MinMark() <= 3);
+  return (marks.MinMark() <= 3);
 }
 void VKStudent::AddMark(VKMark* mark)
 {
-  marks->marks.push_back(*mark);
+  try
+  {
+    marks.Add(*mark);
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is empty");
+  }
 }

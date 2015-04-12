@@ -73,6 +73,7 @@ void VKList::Clear(void)
     return;
   while (head->GetPreviousObject() != 0)
     head = head->GetPreviousObject();
+
   VKListObject *tmp = head;
   while (head != 0)
   {
@@ -81,4 +82,3 @@ void VKList::Clear(void)
     delete tmp;
   }
 }
-

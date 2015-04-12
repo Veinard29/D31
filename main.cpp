@@ -59,7 +59,7 @@ int main()
       cin >> sex;
       cout << "Введите возраст: ";
       cin >> age;
-      VKStudent* student = new VKStudent(name, sex == 1, age);
+      VKStudent student = VKStudent(name, sex == 1, age);
       cout << "Введите количество предметов: ";
       int count = 0;
       cin >> count;
@@ -72,9 +72,9 @@ int main()
         cout << "Введите оценку: ";
         cin >> mark;
         VKSubject subject(name);
-        student->AddMark(new VKMark(subject, mark));
+        student.AddMark(new VKMark(subject, mark));
       }
-      group->AddStudent(student);
+      group->AddStudent(&student);
       cout << endl;
     }
     else if (choice == 3)
@@ -93,9 +93,8 @@ int main()
       cin >> sex;
       cout << "Введите возраст: ";
       cin >> age;
-      VKStudent* student = new VKStudent(name, sex == 1, age);
-      group->RemoveStudent(student);
-      delete student;
+      VKStudent student = VKStudent(name, sex == 1, age);
+      group->RemoveStudent(&student);
       cout << endl;
     }
     else if (choice == 4)
@@ -115,9 +114,8 @@ int main()
         cout << "Группа не создана" << endl;
         continue;
       }
-      VKStudentList* list = group->GetExcellentStudents();
-      cout << list->Print() << endl;
-      delete list;
+      VKStudentList list = group->GetExcellentStudents();
+      cout << list.Print() << endl;
       cout << endl;
     }
     else if (choice == 6)
@@ -127,9 +125,8 @@ int main()
         cout << "Группа не создана" << endl;
         continue;
       }
-      VKStudentList* list = group->GetBadStudents();
-      cout << list->Print() << endl;
-      delete list;
+      VKStudentList list = group->GetBadStudents();
+      cout << list.Print() << endl;
       cout << endl;
     }
     else if (choice == 7)
@@ -139,7 +136,7 @@ int main()
         cout << "Группа не создана" << endl;
         continue;
       }
-      cout << "Средний балл: " << group->GetStudents()->Average() << endl;
+      cout << "Средний балл: " << group->GetStudents().Average() << endl;
       cout << endl;
     }
     else if (choice == 8)
@@ -153,7 +150,7 @@ int main()
       cout << "Введите название предмета: ";
       cin >> name;
       VKSubject subject(name);
-      cout << "Средний балл по предмету: " << group->GetStudents()->Average() << endl;
+      cout << "Средний балл по предмету: " << group->GetStudents().Average() << endl;
       cout << endl;
     }
     else if (choice == 9)

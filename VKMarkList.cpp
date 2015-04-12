@@ -1,42 +1,70 @@
-#include "VKMark.h"
-VKMark::VKMark()
+#include "VKMarkList.h"
+
+string VKMarkList::GetClassName()
 {
-  subject = VKSubject();
-  mark = 0;
+  return "VKMarkList";
 }
-VKMark::VKMark(const VKSubject& _subject, const unsigned int& _mark)
+
+unsigned int VKMarkList::MinMark()
 {
-  subject = _subject;
-  mark = _mark;
+  unsigned int min = INT_MAX;
+  for (list<VKMark>::iterator m = marks.begin(); m != marks.end(); ++m)
+  {
+    unsigned int mark = m->GetMark();
+    if (mark < min)
+      min = mark;
+  }
+  return min;
 }
-string VKMark::GetClassName()
+unsigned int VKMarkList::MaxMark()
 {
-  return "VKMark";
+  unsigned int max = 0;
+  for (list<VKMark>::iterator m = marks.begin(); m != marks.end(); ++m)
+  {
+    unsigned int mark = m->GetMark();
+    if (mark > max)
+      max = mark;
+  }
+  return max;
 }
-string VKMark::Print()
+float VKMarkList::Average()
 {
-  stringstream ss;
-  ss << "Subject: " << subject.GetSubjectName() << " Mark: " << mark;
-  return ss.str();
+  float avg = 0.0;
+  unsigned int count = 0;
+
+  for (list<VKMark>::iterator m = marks.begin(); m != marks.end(); ++m)
+  {
+    unsigned int mark = m->GetMark();
+    avg += mark;
+    count++;
+  }
+  return avg / count;
 }
-bool VKMark::operator==(const VKMark& object)
+float VKMarkList::Average(const VKSubject& subject)
 {
-  VKMark m = object;
-  return (m.GetSubject() == GetSubject() && m.GetMark() == GetMark());
+  float avg = 0.0;
+  unsigned int count = 0;
+
+  for (list<VKMark>::iterator m = marks.begin(); m != marks.end(); ++m)
+  {
+    if (m->GetSubject() == subject)
+    {
+      avg += m->GetMark();
+      count++;
+    }
+  }
+  return avg / count;
 }
-VKSubject VKMark::GetSubject()
+string VKMarkList::Print()
 {
-  return subject;
+  stringstream result;
+  for (list<VKMark>::iterator m = marks.begin(); m != marks.end(); ++m)
+  {
+    result << m->Print() << endl;
+  }
+  return result.str();
 }
-void VKMark::SetSubject(const VKSubject& _subject)
+void VKMarkList::Add(const VKMark& mark)
 {
-  subject = _subject;
-}
-unsigned int VKMark::GetMark()
-{
-  return mark;
-}
-void VKMark::SetMark(const unsigned int& _mark)
-{
-  mark = _mark;
+  marks.push_back(mark);
 }

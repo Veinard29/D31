@@ -2,19 +2,22 @@
 VKGroup::VKGroup()
 {
   Name = "";
-  students = new VKStudentList();
 }
 VKGroup::VKGroup(const string& _Name, VKStudentList* _students)
 {
   Name = _Name;
-  students = _students;
-  if (students == 0)
-    students = new VKStudentList();
+  try
+  {
+    if (_students != 0)
+      students = *_students;
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is null");
+  }
 }
 VKGroup::~VKGroup()
 {
-  if (students != 0)
-    delete students;
 }
 string VKGroup::GetClassName()
 {
@@ -23,7 +26,7 @@ string VKGroup::GetClassName()
 string VKGroup::Print()
 {
   stringstream ss;
-  ss << "Name: " << Name << endl << "Students: " << endl << students->Print();
+  ss << "Name: " << Name << endl << "Students: " << endl << students.Print();
   return ss.str();
 }
 string VKGroup::GetName()
@@ -34,41 +37,61 @@ void VKGroup::SetName(const string& _Name)
 {
   Name = _Name;
 }
-VKStudentList* VKGroup::GetStudents()
+VKStudentList& VKGroup::GetStudents()
 {
   return students;
 }
-VKStudentList* VKGroup::GetExcellentStudents()
+VKStudentList VKGroup::GetExcellentStudents()
 {
-  return students->GetExcellentStudents();
+  return students.GetExcellentStudents();
 }
-VKStudentList* VKGroup::GetBadStudents()
+VKStudentList VKGroup::GetBadStudents()
 {
-  return students->GetBadStudents();
+  return students.GetBadStudents();
 }
 float VKGroup::Average()
 {
-  return students->Average();
+  return students.Average();
 }
 float VKGroup::Average(const VKSubject& subject)
 {
-  return students->Average(subject);
+  return students.Average(subject);
 }
 void VKGroup::Clear()
 {
-  students->students.clear();
-  students = 0;
+  students.Clear();
 }
 void VKGroup::AddStudent(VKStudent* student)
 {
-  students->students.push_back(*student);
+  try
+  {
+    students.Add(*student);
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is null");
+  }
 }
 void VKGroup::RemoveStudent(VKStudent* student)
 {
-  students->students.remove(*student);
+  try
+  {
+    students.Remove(*student);
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is null");
+  }
 }
 VKGroup& VKGroup::operator+=(VKStudent* student)
 {
-  students->students.push_back(*student);
-  return* this;
+  try
+  {
+    students.Add(*student);
+    return*this;
+  }
+  catch (...)
+  {
+    throw logic_error("Pointer is null");
+  }
 }

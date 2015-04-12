@@ -1,17 +1,14 @@
 #pragma once
 #include "VKObject.h"
 #include "VKStudentList.h"
-// класс группы
 class VKGroup : public VKObject
 {
 public:
   VKGroup();
   VKGroup(const string& _Name, VKStudentList* _students);
   virtual ~VKGroup();
-
   string GetClassName();
   string Print();
-
   string GetName();
   void SetName(const string& _Name);
   VKStudentList& GetStudents();
@@ -20,7 +17,6 @@ public:
   float Average();
   float Average(const VKSubject& subject);
   void Clear();
-
   void AddStudent(VKStudent* student);
   void RemoveStudent(VKStudent* student);
   VKGroup& operator+=(VKStudent* student);

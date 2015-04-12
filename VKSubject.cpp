@@ -1,80 +1,30 @@
-#include "VKStudent.h"
-VKStudent::VKStudent()
+#include "VKSubject.h"
+VKSubject::VKSubject()
 {
-  Name = "";
-  Sex = true;
-  Age = 0;
-  marks = new VKMarkList();
+  SubjectName = "";
 }
-VKStudent::VKStudent(const string& _Name, const bool& _Sex, const unsigned int& _Age, VKMarkList* _marks)
+VKSubject::VKSubject(const string& _SubjectName)
 {
-  Name = _Name;
-  Sex = _Sex;
-  Age = _Age;
-  marks = _marks;
-  if (marks == 0)
-    marks = new VKMarkList();
+  SubjectName = _SubjectName;
 }
-VKStudent::~VKStudent()
+string VKSubject::GetClassName()
 {
-  delete marks;
+  return "VKSubject";
 }
-string VKStudent::GetClassName()
+string VKSubject::Print()
 {
-  return "VKStudent";
+  return GetSubjectName();
 }
-string VKStudent::Print()
+bool VKSubject::operator==(const VKSubject& object)
 {
-  stringstream ss;
-  stringstream sm;
-  ss << "Name: " << Name << " Sex: " << ((Sex == true) ? "M" : "F") << " Age: " << Age;
-  sm << marks->Print();
-  if (!sm.str().empty()) 
-    ss << " Marks: " << endl << ss.str();
-  return ss.str();
+  VKSubject s = object;
+  return s.GetSubjectName() == GetSubjectName();
 }
-bool VKStudent::operator==(const VKStudent& object)
+string VKSubject::GetSubjectName()
 {
-  VKStudent s = object;
-  return (Name == s.GetName() && Sex == s.GetSex() && Age == s.GetAge());
+  return SubjectName;
 }
-string VKStudent::GetName()
+void VKSubject::SetSubjectName(const string& _SubjectName)
 {
-  return Name;
-}
-void VKStudent::SetName(const string& _Name)
-{
-  Name = _Name;
-}
-bool VKStudent::GetSex()
-{
-  return Sex;
-}
-void VKStudent::SetSex(const bool& _Sex)
-{
-  Sex = _Sex;
-}
-unsigned int VKStudent::GetAge()
-{
-  return Age;
-}
-void VKStudent::SetAge(const unsigned int& _Age)
-{
-  Age = _Age;
-}
-VKMarkList* VKStudent::GetMarks()
-{
-  return marks;
-}
-bool VKStudent::IsExcellent()
-{
-  return (marks->MinMark() == 5);
-}
-bool VKStudent::IsBad()
-{
-  return (marks->MinMark() <= 3);
-}
-void VKStudent::AddMark(VKMark* mark)
-{
-  marks->marks.push_back(*mark);
+  SubjectName = _SubjectName;
 }
